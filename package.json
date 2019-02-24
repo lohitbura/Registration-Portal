@@ -26,5 +26,8 @@
     "sendotp": "^1.2.9",
     "bcrypt": "^3.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "engines": {
+    "node": "10.x"
+  }
 }

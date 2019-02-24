@@ -23,7 +23,7 @@ const bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb://127.0.0.1:27017/logindata",{ useNewUrlParser: true });
+mongoose.connect("mongodb://lohit:bharat123auth@ds139435.mlab.com:39435/bharat",{ useNewUrlParser: true });
 //var db = mongoose.connection;
 
 app.set('views', path.join(__dirname, 'views'));
