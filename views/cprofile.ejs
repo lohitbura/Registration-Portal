@@ -25,7 +25,7 @@
 
 .inputfile:focus + label,
 .inputfile + label:hover {
-    background-color: red;
+    background-color: white;
 }
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
@@ -50,7 +50,7 @@
         <form action="/profilePic" method="post" enctype="multipart/form-data">
           <label class="custom-file-upload">
               
-              <input type="file" name="profilePic" id="file" class="inputfile"/>
+              <input type="file" name=<%=user.name%> id="file" class="inputfile" required/>
               <label for="file"> <%if(user.image){%> <img src=<%= "/profileUploads/"+user.image %> class="img-circle" style="height:150px; width :150px"><%}else{%>
                 <img src="/user.jpg" class="img-circle" style="height:150px ; width: 150px" > <%}%></label>
              
