@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var passportSetup= require('./config/passport-setup');
 var app = express();
+var adminRouter = require('./routes/admin-routes');
 var verifyRouter = require('./routes/verify-routes');
 var showRoutes = require('./routes/showRouter');
 var otpRouter = require('./routes/otp-routes');
@@ -55,8 +56,10 @@ app.use('/user',localRouter);
 app.use('/verify',verifyRouter);
 app.use('/profile/show',profileRouter);
 app.use('/forgot',forgotRouter);
+app.use('/admin',adminRouter);
 app.use('/profilePic',profilePicRouter);
 app.use('/',showRoutes);
+
 
  //app = require("https-localhost");
 //  var options = {
@@ -68,7 +71,8 @@ app.use('/',showRoutes);
 
 
 //var server = https.createServer( options, app );
+var port = process.env.PORT || 4000;
 
-app.listen( 4000, function () {
+app.listen( port, function () {
     console.log( 'Express server listening on port ' );
 } );

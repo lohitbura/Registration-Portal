@@ -1,0 +1,113 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    hi admin
+    <button onclick="getUsers(0)">Show Users</button>
+    <a href="/admin/logout">Logout</a>
+    <form method="POST">
+    <input type="text" placeholder="Search..." id="search1" name="search"/>
+    <button type="button" onclick="searchUser()">Search</button>
+    </form>
+    <div id="search"></div>
+    <div id="mainBody"></div>
+
+
+
+    <script>
+        
+    function searchUser()
+    {
+       var data = document.getElementById('search1').value;
+        console.log('search tk aaya',data);
+        $.ajax({
+            method: "GET",
+                url : "/admin/search",
+                data: {data: data},
+                success: function(data, status){
+                    searchPage(data);
+                }
+        })
+    }
+    function searchPage(data)
+
+    {
+        console.log(data);
+    }
+        function getUsers(page_no) {
+            $.ajax({
+                method: "GET",
+                url : "/admin/show-users",
+                data: {page: page_no},
+                success: function(data, status){
+                    console.log(page_no);
+                    console.log(data.users);
+                    createPage(data);
+                }
+            });
+    
+        }
+        function removeUser(id,page_no)
+        {
+            $.ajax(
+                {
+                    method : "GET",
+                    url : "/admin/deleteUser",
+                    data : {id : id},
+                    success : function (data,status){
+                        console.log(page_no);
+                    console.log(data.users);
+                    getUsers(page_no);
+                    }
+                }
+            )
+        }
+
+
+        function createPage(data) {
+        $("#mainBody").children().remove();
+
+        var users = data.users;
+        var pages = data.pages;
+        var current = data.current;
+        var total = data.total;
+        var count = data.count;
+        
+        var result = '<div>';
+             for(var i=0;i<count;i++){
+
+                result += '<p>' + users[i].username + '</p>';
+                result += '<button onclick="removeUser(this.id,'+current+')" id='+users[i]._id+'>Remove</button>'
+             }
+             result +='</div>';
+             var nav ='<footer>'
+        nav += '<nav aria-label="">'
+        nav += '<ul class="pagination justify-content-end">'
+// nav += '<li class="page-item" onclick="getProducts(0)"><a class="page-link" href="#">First</a></li>'
+
+        for (var i = Math.max(0, current - 5); i < Math.min(current + 5, pages); i++){
+            if (i == current){
+                nav += '<li class="page-item active"><a class="page-link" href="#">'
+                    + (i + 1)
+                    +'<span class="sr-only">(current)</span></a></li>'
+            }else{
+                nav += '<li class="page-item" onclick="getUsers('
+                    + i
+                    + ')"><a class="page-link" href="#">' + (i + 1) +'</a></li>'
+            }
+        }
+        nav += '</ul>'
+        nav += '</nav></footer>'
+        result += nav;
+
+        $("#mainBody").append(result);
+    }
+    </script>
+
+</body>
+</html>
