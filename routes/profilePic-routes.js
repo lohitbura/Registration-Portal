@@ -16,7 +16,7 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage })
   
 
-router.post('/',upload.single(req.user.name), function (req, res) {
+router.post('/',upload.single('profilePic'), function (req, res) {
 
   
 
