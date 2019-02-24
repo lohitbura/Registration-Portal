@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+  <title>Forgot Password</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/style.scss">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script  src="/js/index.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="form">
+      <ul class="tab-group">
+        <li class="tab"><a href="/">Sign Up</a></li>
+        <li class="tab"><a href="/login">Log In</a></li>
+      </ul>
+<div id="login">
+          <h1>Forgot Password</h1>
+
+          <form action="/forgot/fill" method="post">
+
+            
+               <div class="form-group">
+                 <input type="text" class="form-control" id="usr" name="username" placeholder="Enter Username" required>
+              </div> 
+                <div class="form-group">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group"> 
+                  <input type="tel" class="form-control" id="pnumber" name="mobile" placeholder="Enter Registered Phone Number" required>
+                </div>
+                
+
+
+          <div align="center">
+            <button type="submit" class="btn btn-primary btn-block"><b>Verify</b></button>
+          </div>
+
+          </form>
+
+        </div>
+        </div>
+        </div>
+        </body>
+</html>

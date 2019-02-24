@@ -1,0 +1,117 @@
+<html>
+<head>
+  <title>WELCOME</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <style>
+  .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+   
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+  
+  </style>
+
+
+  </head>
+  
+<body>
+<div class="container">
+    <h1><b><%=user.name%></b></h1><hr >
+    <div class="row">
+      <div class="col-md-4" style="padding-top:20px; padding-left:20px;">
+      
+        
+        <form action="/profilePic" method="post" enctype="multipart/form-data">
+          <label class="custom-file-upload">
+              
+              <input type="file" name="profilePic" id="file" class="inputfile"/>
+              <label for="file"> <%if(user.image){%> <img src=<%= "/profileUploads/"+user.image %> class="img-circle" style="height:150px; width :150px"><%}else{%>
+                <img src="/user.jpg" class="img-circle" style="height:150px ; width: 150px" > <%}%></label>
+             
+          </label>
+          
+          <hr/>
+      
+          <input type="submit" class="btn btn-primary" value="Upload">
+</form>
+<hr/>
+<button type="button" class="btn btn-primary"><a href="/logout" style="text-decoration:none ; color:white">Logout</a></button>
+    </div>
+    <div class="col-md-8">
+      <!-- <div class="alert alert-danger">
+  This is an <strong>.alert.</strong> Use this to show important messages to the user.
+      </div> -->
+      <h3><b>Personal Info</b></h3><hr>
+      <form>
+      <div class="form-group">
+        <label for="usr">Name:</label>
+        <input type="text" class="form-control" id="usr" name="name" placeholder=<%=user.name%>>
+      </div>
+      <div class="form-group">
+        <label for="usr">Email</label>
+        <input type="email" class="form-control" id="email" placeholder=<%=user.email%>
+      </div>
+      <div class="form-group">
+        <label for="usr">Username</label>
+        <input type="text" class="form-control" id="username" placeholder=<%=user.username%>>
+      </div>
+      <div class="form-group">
+        <label for="usr">Phone Number</label>
+        <input type="text" class="form-control" id="mobile" placeholder=<%=user.mobile%>>
+      </div>
+      <div class="form-group">
+        <label for="usr">DATE Of Birth</label>
+        <input type="text" class="form-control" id="dob" placeholder=<%=user.dob%>>
+      </div>
+     
+
+      <label for="usr">Gender</label>
+      <select class="form-control" id="sel1">
+
+        <option><%=user.gender%></option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+      <div align="center" style="padding-top:20px;">
+        <button type="button" class="btn btn-primary btn-block"><b>Update</b></button>
+      </div>
+</form>
+    </div>
+    </div>
+    <div class="row">
+<div class="col-md-12" >
+<br><br><br>
+      </div>
+
+
+
+</div>
+</body>
+</html>
