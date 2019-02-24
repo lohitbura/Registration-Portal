@@ -9,8 +9,8 @@ var profileRouter = require('./routes/profile-routes');
 var localRouter = require('./routes/local-routes');
 var forgotRouter = require('./routes/forgot-routes');
 var profilePicRouter = require('./routes/profilePic-routes');
-var fs = require('fs')
-var https = require('https');
+// var fs = require('fs')
+// var https = require('https');
 var path = require('path');
 var multer = require('multer');
 app.use(express.static(path.join(__dirname,'public')));
@@ -59,16 +59,16 @@ app.use('/profilePic',profilePicRouter);
 app.use('/',showRoutes);
 
  //app = require("https-localhost");
- var options = {
-    key: fs.readFileSync( './localhost.key' ),
-    cert: fs.readFileSync( './localhost.cert' ),
-    requestCert: false,
-    rejectUnauthorized: false
-};
+//  var options = {
+//     key: fs.readFileSync( './localhost.key' ),
+//     cert: fs.readFileSync( './localhost.cert' ),
+//     requestCert: false,
+//     rejectUnauthorized: false
+// };
 
 
-var server = https.createServer( options, app );
+//var server = https.createServer( options, app );
 
-server.listen( 4000, function () {
+app.listen( 4000, function () {
     console.log( 'Express server listening on port ' );
 } );
