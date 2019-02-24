@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js"
-},
+  },
   "author": "lohit bura",
   "license": "ISC",
   "dependencies": {
