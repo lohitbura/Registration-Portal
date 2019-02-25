@@ -82,29 +82,48 @@ router.get('/search',(req,res)=>
     })
 })
 
-  router.get('/show-users', function(req, res, next) {
-    var perPage = 8;
-    var page = Number(req.query.page);
-    console.log("here aaya h ")
-    User
-        .find({})
-        .skip((perPage * page))
-        .limit(perPage)
-        .exec(function(err, users) {
+//   router.get('/show-users', function(req, res, next) {
+//     var perPage = 8;
+//     var page = Number(req.query.page);
+//     console.log("here aaya h ")
+//     User
+//         .find({})
+//         .skip((perPage * page))
+//         .limit(perPage)
+//         .exec(function(err, users) {
 
-            User.count().exec(function(err, total) {
-                 if (err) return next(err);
-                res.send({
-                    users: users,
-                    total: total,
-                    current: page,
-                    count: Math.min(perPage, total-(perPage*page)),
-                    pages: Math.ceil(total / perPage)
+//             User.count().exec(function(err, total) {
+//                  if (err) return next(err);
+//                 res.send({
+//                     users: users,
+//                     total: total,
+//                     current: page,
+//                     count: Math.min(perPage, total-(perPage*page)),
+//                     pages: Math.ceil(total / perPage)
 
-                })
+//                 })
+//             })
+//         })
+// });
+const authCheck = (req,res,next)=>
+{
+    
+    if(!req.session.admin)
+    {
+        res.redirect('/');
+    }
+    else{
+        next();
+    }
+};
+
+router.get('/show-users', authCheck, (req, res, next) => {
+    User.find({}, (err, users) => {
+                if (err) return next(err)
+                    res.render('getUser', {users: users}); 
             })
-        })
-});
+})
+
 
 router.use('/',(req,res)=>
 {
