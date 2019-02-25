@@ -37,7 +37,7 @@ router.use('/add',(req,res)=>
   .then(function() {
     
       req.session.destroy();
-      res.render('login');
+      res.render('login',{message : null});
   })
   .catch(function(error){
       console.log("Error saving user: ");
@@ -46,10 +46,11 @@ router.use('/add',(req,res)=>
   });
    
 }
-}
 else{
-    res.redirect('/');
+    res.render('index',{message : "You Have Entered Wrong OTP"});
 }
+}
+
 })
 
 module.exports = router;

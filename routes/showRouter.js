@@ -13,7 +13,7 @@ router.use('/data',(req,res)=>
         if(currentuser)
         {
             
-            res.redirect('/');
+            res.render('index',{message : "User Already Exist"});
         }
         else{
             var otp1 = parseInt(Math.random() * (9999 - 1000) + 1000);
@@ -42,7 +42,7 @@ router.use('/data',(req,res)=>
 
 router.use('/login',(req,res)=>
 {
-    res.render('login');
+    res.render('login',{message : null});
 });
 
 router.use('/logout',(req,res)=>
@@ -54,7 +54,7 @@ router.use('/logout',(req,res)=>
 
 router.use('/',(req,res)=>
 {
-    res.render('index');
+    res.render('index',{message : null});
 });
 
 

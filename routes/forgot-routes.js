@@ -65,7 +65,7 @@ router.post('/add',authCheck,(req,res)=>
         res.render('newpassword');
     }
     else{
-        res.redirect('/');
+        res.render('index',{message : "You Have Entered Wrong OTP"});
     }
 })
 
@@ -84,7 +84,7 @@ router.post('/change',authCheck1,(req,res)=>
             .then(function() {
               
                 req.session.destroy();
-                res.render('login');
+                res.render('login',{message : null});
             })
             .catch(function(error){
                 console.log("Error saving user: ");

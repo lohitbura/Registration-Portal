@@ -12,6 +12,14 @@
 </head>
 <body>
   <div class="container">
+      <% if(message) { %>
+        <div class="alertDiv fixed-top" id="alertDiv">
+          <div class="alert alert-dismissible alert-danger" id="alertDivs">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong><%= message %></strong>
+          </div>
+        </div>
+      <% } %>
     <div class="form">
       <ul class="tab-group">
         <li class="tab"><a href="/">Sign Up</a></li>

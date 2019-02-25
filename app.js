@@ -10,7 +10,7 @@ var profileRouter = require('./routes/profile-routes');
 var localRouter = require('./routes/local-routes');
 var forgotRouter = require('./routes/forgot-routes');
 var profilePicRouter = require('./routes/profilePic-routes');
-
+var failureRouter = require('./routes/failure-routes');
 // var fs = require('fs')
 // var https = require('https');
 var path = require('path');
@@ -52,7 +52,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('public')); 
 
-
+app.use('/failure',failureRouter);
 app.use('/otp',otpRouter);
 app.use('/user',localRouter);
 app.use('/verify',verifyRouter);

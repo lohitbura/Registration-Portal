@@ -9,7 +9,7 @@ var passportSetup= require('../config/passport-setup');
 
 router.post('/local',passport.authenticate('local',{
     successRedirect:'/profile/show',
-    failureRedirect: '/'
+    failureRedirect: '/failure/login'
 })
 );
 
