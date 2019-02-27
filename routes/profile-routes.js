@@ -1,5 +1,6 @@
 router = require('express').Router();
-
+const SendOtp = require('sendotp');
+const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
 const authCheck = (req,res,next)=>
 {
     console.log('yha aaya',req.user)
@@ -42,10 +43,7 @@ router.get('/edit',authCheck,(req,res)=>{
         {
             req.user.set({gender : value})
         }
-        if(data=="mobile")
-        {
-            req.user.set({mobile : value})   
-        }
+        
        
         req.user.save(function (err, updatedTank) {
             
@@ -53,13 +51,38 @@ router.get('/edit',authCheck,(req,res)=>{
         });
     });
 }
-    
+    res.send(value);
 
+})
+
+router.post('/change',(req,res)=>{
+    console.log("ayaaaaaaa");
+
+    User.findOne({mobile : req.body.mobile}).then((currentuser)=>
+            {
+                if(currentuser)
+                {
+                    res.render('/cprofile',{message : "Phone No. Already Exist"});
+                }
+                else{
+                    var otp1 = parseInt(Math.random() * (9999 - 1000) + 1000);
+                    var mobile = parseInt(req.body.mobile);
+           
+            sendOtp.send(mobile, "PRIIND", otp1, function (error, data) {
+               
+                console.log(data);
+                req.session.otp = otp1;
+                req.session.mobile = mobile;
+                
+                res.redirect('/otp/change');
+              });
+                }
+            })  
 })
 
 router.get('/',authCheck,(req,res)=>{
     console.log('aa gya yha to');
-    res.render('cprofile',{user:req.user})
+    res.render('cprofile',{message : null ,user:req.user})
 });
 
 module.exports = router;

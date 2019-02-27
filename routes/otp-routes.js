@@ -12,6 +12,11 @@ const authCheck = (req,res,next)=>
     }
 };
 
+router.get('/change',authCheck,(req,res)=>{
+    console.log('aa gya yha to');
+    res.render('verifyChange');
+});
+
 
 router.get('/',authCheck,(req,res)=>{
     console.log('aa gya yha to');

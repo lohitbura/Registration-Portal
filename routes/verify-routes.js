@@ -52,5 +52,32 @@ else{
 }
 
 })
+router.use('/change',(req,res)=>
+{
+    if(req.session.otp){
+        
+    if(req.body.otp==req.session.otp)
+    {
+
+        User.findById(req.user.username, function (err, user) {
+
+            console.log(req.user.username);
+            
+           req.user.set({mobile : req.session.mobile})
+           
+           
+            req.user.save(function (err, updatedTank) {
+                
+               res.redirect('/profile/show');
+            });
+        });
+   
+}
+else{
+    res.render('cprofile',{message : "You Have Entered Wrong OTP"});
+}
+}
+
+})
 
 module.exports = router;

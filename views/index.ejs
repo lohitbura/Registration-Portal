@@ -1,111 +1,568 @@
-<html lang="en">
-<head>
-  <title>Signup</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/style.scss">
-  <script src="/js/jquery.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
-  <script  src="/js/index.js"></script>
-  <script>
-    function checkForm(form)
-    {
-      if(form.name.value == "" || form.email.value == "" || form.password.value == "" || form.dob.value == "" || form.mobile.value == "" || form.username.value == "" || form.gender.value == "")
-      {
-        alert("Filling Every Column is mandatory");
-        return false
-      }
-      if(form.password.value !== form.password1.value)
-      {
-        alert("Password Confirmation Error");
-        return false
-      }
-      if(form.password.value.length < 8 || form.password.value.length >15)
-      {
-        alert("Password Length Should be in between 8 - 15");
-        return false
-      }
-      var re = /^[\w ]+$/;
 
-// validation fails if the input doesn't match our regular expression
-if(re.test(form.password.value))
- {
-  alert("Password Must Have Some Special Character other than alphabets and Numbers");
-  form.password.focus();
-  return false;
-}
-return true
-
-    }
-  
-  </script>
-</head>
-<body>
-  <div class="container">
-    <% if(message) { %>
-    <div class="alertDiv fixed-top" id="alertDiv">
-      <div class="alert alert-dismissible alert-danger" id="alertDivs">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong><%= message %></strong>
-      </div>
-    </div>
-  <% } %>
-    <div class="form">
-
-      <ul class="tab-group">
-        <li class="tab active"><a href="/">Sign Up</a></li>
-        <li class="tab"><a href="/login">Log In</a></li>
-      </ul>
-      <div class="page-header">
-        <h1>Sign Up for Free</h1>
-      </div>
-      <form class="md-form" action="/data" method="POST" onsubmit="return checkForm(this);">
-          <div class="form-group">
-            
-              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Full Name" required>
-            </div>
-            <div class="form-group">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="usr" name="username" placeholder="Enter Username" required>
-        </div>
-        <div class="form-group">
-            <input type="tel" class="form-control" id="pnumber" name="mobile" placeholder="Enter Your Phone Number" required>
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter Password" required>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="pwd1" name="password1" placeholder="Confirm Your Password" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="dob" name="dob" placeholder="Enter Date Of Birth (DD/MM/YY)" required>
-                        </div>
-                        <div class="form-group">
-
-  <select class="form-control" id="sel1" name="gender" required>
-    <option>Select Your Gender</option>
-    <option>Male</option>
-    <option>Female</option>
-    <option>Other</option>
-  </select>
-</div>
-<div class="form-group">
-    <input type="file" class="form-control">
-    </div>
-    <div align="center">
-      <!-- <input type="submit" class="btn btn-primary"  value="Signup"> -->
-      <button type="submit" class="btn btn-primary btn-block"><b>Signup</b></button>
-    </div>
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+ 
+     <!-- important meta tags -->
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+     <!-- Title -->
+     <title>Bharat Auth</title>
+     
+     <!-- Basic SEO -->
+     <meta name="description" content="Creative website development with html5, css3, jQuery & bootstrap framework">
+     <meta name="keywords" content="HTML5, CSS3, JQuery, Bootstrap, Web Design, Web Development, Responsive website, Creative website">
+ 
+     <!-- Favicon -->
+     
+ 
+     <!-- Google Fonts -->
+     <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+ 
+     <!-- Fontawesome -->
+     <link rel="stylesheet" href="/index/css/font-awesome/css/font-awesome.min.css">
+ 
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="/index/css/bootstrap/bootstrap.min.css">
+ 
+     <!-- Owl Carousel CSS -->
+     <link rel="stylesheet" href="/index/css/owl-carousel/owl.carousel.min.css">
+     <link rel="stylesheet" href="/index/css/owl-carousel/owl.theme.default.min.css">
+ 
+     <!-- Responsive Tabs CSS -->
+     <link rel="stylesheet" href="/index/css/responsive-tabs/responsive-tabs.min.css">
+ 
+     <!-- Magnific Popup -->
+     <link rel="stylesheet" href="/index/css/magnific-popup/magnific-popup.min.css">
+ 
+     <!-- Animate CSS -->
+     <link rel="stylesheet" href="/index/css/animate/animate.min.css">
+ 
+     <!-- Custom CSS -->
+     <link rel="stylesheet" href="/index/css/style.css">
+ 
+     <!-- Responsive CSS -->
+     <link rel="stylesheet" href="/index/css/responsive.css">
+ 
+ 
+ </head>
+ 
+ <body data-spy="scroll" data-target=".navbar" data-offset="65">
+ 
+     <!-- Preloader -->
+     <div id="preloader">
+         <div id="status">&nbsp;</div>
+     </div>
+ 
+     <!-- Header -->
+     <header>
+         <nav class="navbar navbar-fixed-top">
+             <div class="container-fluid">
+                 <div class="site-nav-wrapper">
+ 
+                     <div class="navbar-header">
+ 
+                         <!-- Mobile Menu Open Button -->
+                         <span id="mobile-nav-open-btn">&#9776;</span>
+ 
+                         <!-- Logo -->
+                         <a style="color : white; font-size: 25px" class="navbar-brand smooth-scroll" href="#home">
+                             Bharat Auth
+                         </a>
+                     </div>
+ 
+                     <!-- Main Menu -->
+                     <div class="container">
+                         <div class="collapse navbar-collapse">
+                             <ul class="nav navbar-nav pull-right">
+                                 <li><a class="smooth-scroll" href="#home">Home</a></li>
+                                 <li><a class="smooth-scroll" href="#about">About</a></li>
+                                
+                                 <li><a class="smooth-scroll" href="#services">Services</a></li>
+                                 
+                                 
+                                 <%if(user){%>
+                                  <li><a href="/profile/show"><%=user.name%></a></li>
+                                  <%}else{%>
+                                   <li><a href="/login">Login</a></li>
+                                   <%}%>
+                             </ul>
+                         </div>
+                     </div>
+ 
+                     <!-- Mobile Menu -->
+                     <div id="mobile-nav">
+                         <!-- Mobile Menu Close Button -->
+                         <span id="mobile-nav-close-btn">&times;</span>
+ 
+                         <div id="mobile-nav-content">
+                             <ul class="nav">
+                                 <li><a class="smooth-scroll" href="#home">Home</a></li>
+                                 <li><a class="smooth-scroll" href="#about">About</a></li>
+                                 <li><a class="smooth-scroll" href="#team">Team</a></li>
+                                 <li><a class="smooth-scroll" href="#services">Services</a></li>
+                                 <li><a class="smooth-scroll" href="#portfolio">Work</a></li>
+                                 
+                                 <li><a class="smooth-scroll" href="#contact">Contact</a></li>
+                               <%if(user){%>
+                                <li><a href="/profile/show">user.name</a></li>
+                                <%}else{%>
+                                 <li><a href="/login">Login</a></li>
+                                 <%}%>
+                                </ul>
+                         </div>
+                     </div>
+ 
+                 </div>
+             </div>
+         </nav>
+     </header>
+     <!-- Header Ends -->
+ 
+     <!-- Home -->
+     <section id="home">
+ 
+      
+ 
+         <!-- Overlay -->
+         <div id="home-overlay"></div>
+ 
+         <!-- Home Content -->
+         <div id="home-content">
+ 
+             <div id="home-content-inner" class="text-center">
+ 
+                 <div id="home-heading">
+                     <h1 id="home-heading-1">Bharat</h1><br>
+                     <h1 id="home-heading-2"><span>Auth</span></h1>
+                 </div>
+ 
+                 <div id="home-text">
+                     <p>Providing You the most Secure And Universal Authentication Platform</p>
+                 </div>
+ 
+                 <div id="home-btn">
+                     <a class="btn btn-general btn-home" href="/signup"  role="button">Register Now</a>
+                 </div>
+ 
+             </div>
+ 
+         </div>
+ 
+         <!-- Arrow Down -->
+         <a href="#about" id="arrow-down" class="smooth-scroll">
+             <i class="fa fa-angle-down"></i>
+         </a>
+ 
+     </section>
+     <!-- Home Ends -->
+ 
+     <!-- About -->
+     <section id="about">
+ 
+         <!-- About 01 -->
+         <div id="about-01">
+ 
+             <div class="content-box-lg">
+ 
+                 <div class="container">
+ 
+                     <div class="row">
+ 
+                         <!-- About Left Side -->
+                         <div class="col-md-6 col-sm-6 wow slideInLeft" data-wow-duration="1s">
+ 
+                             <div id="about-left">
+                                 <div class="vertical-heading">
+                                     <h5>Who We Are</h5>
+                                     <h2>A <strong>Story</strong><br>About Us</h2>
+                                 </div>
+                             </div>
+ 
+                         </div>
+ 
+                         <!-- About Right Side -->
+                         <div class="col-md-6 col-sm-6 wow slideInRight" data-wow-duration="1s">
+ 
+                             <div id="about-right">
+                                 <p style="font-size : 15px;">From Classmates to Business Parters , We the Team Originals came a long way. From college labs to Our Own Offices , It Was the Glorious Ride .</p>
+ 
+                                 <p style="font-size : 15px;">An idea Of Providing the World A unique , Secure , and Universal Authentication system bind us together to make a team having the knowledge of various technologies. </p>
+                             </div>
+ 
+                         </div>
+ 
+                     </div>
+ 
+                    
+ 
+                 </div>
+ 
+             </div>
+ 
+         </div>
+         <!-- About 01 Ends -->
+ 
+         <!-- About 02 -->
+         <div id="about-02">
+ 
+             <div class="content-box-md">
+ 
+                 <div class="container">
+ 
+                     <div class="row">
+ 
+                         <div class="col-md-4 col-sm-4 wow fadeInLeft">
+                             <!-- About item 01 -->
+                             <div class="about-item text-center">
+                                 <i class="fa fa-rocket"></i>
+                                 <h3>Mission</h3>
+                                 <hr>
+                                 <p>Keeping Users Privacy and security is our mission. We want to provide a platform in which a user can feel safe about there privacy</p>
+                             </div>
+ 
+                         </div>
+                         <div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-duration="2s">
+                             <!-- About item 02 -->
+                             <div class="about-item text-center">
+                                 <i class="fa fa-eye"></i>
+                                 <h3>Vision</h3>
+                                 <hr>
+                                 <p>Our Vision is to make a unique Online Identity of every user on internet . So that User can login into any Website using this identity </p>
+                             </div>
+ 
+                         </div>
+                         <div class="col-md-4 col-sm-4  wow fadeInRight">
+                             <!-- About item 03 -->
+                             <div class="about-item text-center">
+                                 <i class="fa fa-pencil"></i>
+                                 <h3>Passion</h3>
+                                 <hr>
+                                 <p>Our Passion is providing the world something new , something unique which can make a difference. We think about our future . we plan about our future.</p>
+                             </div>
+ 
+                         </div>
+ 
+                     </div>
+ 
+                 </div>
+ 
+             </div>
+ 
+         </div>
+         <!-- About 02 Ends -->
+ 
+     </section>
+     <!-- About Ends -->
+ 
+     
+ 
+     <!-- Statement -->
+     <section id="statement">
+ 
+         <div class="content-box-lg">
+ 
+             <div class="container">
+ 
+                 <div class="row">
+ 
+                     <div class="col-md-12 wow fadeIn">
+ 
+                         <div id="tech-statement" class="text-center">
+ 
+                             <h3><i class="fa fa-quote-left"></i> Your Privacy Is Our Priority <br> Your Service Is Our Pleasure  <i class="fa fa-quote-right"></i> </h3>
+                             <p>- Team Originals -</p>
+ 
+                         </div>
+ 
+                     </div>
+ 
+                 </div>
+ 
+             </div>
+ 
+         </div>
+ 
+     </section>
+     <!-- Statement Ends -->
+ 
+     <!-- Services -->
+     <section id="services">
+ 
+         <!-- Services 01 -->
+         <div id="services-01">
+             <div class="content-box-lg">
+ 
+                 <div class="container">
+ 
+                     <div class="row">
+ 
+                         <div class="col-md-12 text-center wow slideInDown">
+ 
+                             <div class="horizontal-heading">
+                                 <h5>What We Do</h5>
+                                 <h2>Our Services</h2>
+                             </div>
+ 
+                         </div>
+ 
+                     </div>
+ 
+                     <div class="row">
+ 
+                         <div class="col-md-7 col-sm-7 wow slideInLeft">
+                             
+                             <img src="/index/img/services/laptop-with-lamp.png" alt="laptop" class="img-responsive">
+                         </div>
+                         <div class="col-md-5 col-sm-5 wow slideInRight">
+ 
+                             <!-- Service 01 -->
+                             <div class="service">
+                                 <div class="row">
+ 
+                                     <div class="col-md-2 col-sm-2">
+                                         <div class="icon text-right">
+                                             <i class="fa fa-paint-brush"></i>
+                                         </div>
+                                     </div>
+ 
+                                     <div class="col-md-10 col-sm-10">
+                                         <h5>Service 01</h5>
+                                         <h4>Universal Identity</h4>
+                                         <p>Main Purpose of our team is to provide every user in the world A Unique and Universal Online Identity. This Identity will work same On digital world as we user Adhar card.</p>
+                                     </div>
+ 
+                                 </div>
+                             </div>
+ 
+                             <!-- Service 02 -->
+                             <div class="service">
+                                 <div class="row">
+ 
+                                     <div class="col-md-2 col-sm-2">
+                                         <div class="icon text-right">
+                                             <i class="fa fa-laptop"></i>
+                                         </div>
+                                     </div>
+ 
+                                     <div class="col-md-10 col-sm-10">
+                                         <h5>Service 02</h5>
+                                         <h4>Third Party Auth</h4>
+                                         <p>We will provide service to those Companies which don't want to authenticate there users by themselve .So clients can register themselve and integrate our Api for third party Authentication</p>
+                                     </div>
+ 
+                                 </div>
+                             </div>
+ 
+                             <!-- Service 03 -->
+                             <div class="service">
+                                 <div class="row">
+ 
+                                     <div class="col-md-2 col-sm-2">
+                                         <div class="icon text-right">
+                                             <i class="fa fa-paper-plane-o"></i>
+                                         </div>
+                                     </div>
+ 
+                                     <div class="col-md-10 col-sm-10">
+                                         <h5>Service 03</h5>
+                                         <h4>Security And Privacy</h4>
+                                         <p>Since It is not any Social Site , So we ensure the privacy and Security of users data. </p>
+                                     </div>
+ 
+                                 </div>
+                             </div>
+ 
+                         </div>
+ 
+                     </div>
+ 
+                 </div>
+ 
+             </div>
+         </div>
+         <!-- Services 01 Ends -->
+ 
+         <!-- Services 02 -->
+         <div id="services-02">
+ 
+             <div class="content-box-md">
+ 
+                 <div id="services-tabs">
+ 
+                     <ul class="text-center">
+                         <li><a href="#service-tab-1">User Registeration</a></li>
+                         <li><a href="#service-tab-2">User Profile</a></li>
+                         <li><a href="#service-tab-3">Client Registeration</a></li>
+                         <li><a href="#service-tab-4">Documentation</a></li>
+                     </ul>
+ 
+                     <!-- Service Tab 01 -->
+                     <div id="service-tab-1" class="service-tab">
+ 
+                         <div class="container">
+                             <div class="row">
+                                 <div class="col-md-6">
+                                     <img src="/index/img/service.jpg" alt="creativity">
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="tab-bg">
+                                         <h2>01</h2>
+                                         <h3>User Registeration</h3>
+                                         <p>A user can register himself to get an unique and Universal Identity which can be used to login in diffrent websites. There will be a unique username and contact no. for every user on which they will get Otp Confirmation.</p>
+ 
+                                         <div id="services-02-btn-01">
+                                             <a class="btn btn-general btn-yellow" href="/signup"  >Register Now</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+ 
+                     </div>
+ 
+                     <!-- Service Tab 02 -->
+                     <div id="service-tab-2" class="service-tab">
+ 
+                         <div class="container">
+                             <div class="row">
+                                 <div class="col-md-6">
+                                     <img src="/index/img/service.jpg" alt="strategy">
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="tab-bg">
+                                         <h2>02</h2>
+                                         <h3> User Profile</h3>
+                                         <p>Each user will have there profile which can be seen by login into the site . A user can update there profile. Every User is advise to not share there profile information like password to anyone.</p>
+ 
+                                         <div id="services-02-btn-02">
+                                             <a class="btn btn-general btn-yellow" href="/login"  >Login</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+ 
+                     </div>
+ 
+                     <!-- Service Tab 03 -->
+                     <div id="service-tab-3" class="service-tab">
+ 
+                         <div class="container">
+                             <div class="row">
+                                 <div class="col-md-6">
+                                     <img src="/index/img/service.jpg" alt="design">
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="tab-bg">
+                                         <h2>03</h2>
+                                         <h3>Request Api</h3>
+                                         <p>Clients Who want to use our Application for third party Authentication can register themselve to get there unique client Id and client secret. All the Clients are suggested to not disclose there client id and secret to any other</p>
+ 
+                                         <div id="services-02-btn-03">
+                                             <a class="btn btn-general btn-yellow" href="http://oauth-233013.appspot.com/"  role="button">Request Api</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+ 
+                     </div>
+                     <!-- Service Tab 04 -->
+                     <div id="service-tab-4" class="service-tab">
+ 
+                         <div class="container">
+                             <div class="row">
+                                 <div class="col-md-6">
+                                     <img src="/index/img/service.jpg" alt="development">
+                                 </div>
+                                 <div class="col-md-6">
+                                     <div class="tab-bg">
+                                         <h2>04</h2>
+                                         <h3>Documentation</h3>
+                                         <p>Full Documentation for client which want to integrate our Api in there system for third party authentication service is provided.</p>
+ 
+                                         <div id="services-02-btn-04">
+                                             <a class="btn btn-general btn-yellow" href="http://oauth-233013.appspot.com/"  role="button">Documentation</a>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+ 
+                     </div>
+ 
+                 </div>
+ 
+             </div>
+ 
+         </div>
+         <!-- Services 02 Ends -->
+ 
+     </section>
+     <!-- Services Ends -->
+ 
     
-  </form>
-
-  </div>
-
-</div>
-</body>
-</html>
-
+    
+ 
+     <!-- Footer  -->
+     <footer class="text-center">
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-12">
+                     <p>
+                         Copyright &copy; 2019 All Rights Reserved By <span>Bharat Auth</span>
+                     </p>
+                     
+                 </div>
+             </div>
+         </div>
+ 
+         <!-- Back To Top -->
+         <a href="#home" id="back-to-top" class="btn btn-sm btn-yellow btn-back-to-top smooth-scroll hidden-sm hidden-xs" title="home" role="button">
+             <i class="fa fa-angle-up"></i>
+         </a>
+ 
+     </footer>
+     <!-- Footer Ends -->
+ 
+     <!-- JQuery -->
+     <script src="/index/js/jquery.min.js"></script>
+ 
+     <!-- Bootstrap JS -->
+     <script src="/index/js/bootstrap/bootstrap.min.js"></script>
+ 
+     <!-- Owl Carousel JS -->
+     <script src="/index/js/owl-carousel/owl.carousel.min.js"></script>
+ 
+     <!-- Waypoints -->
+     <script src="/index/js/waypoints/jquery.waypoints.min.js"></script>
+ 
+     <!-- Responsive Tabs JS -->
+     <script src="/index/js/responsive-tabs/jquery.responsiveTabs.min.js"></script>
+ 
+     <!-- Isotope -->
+     <script src="/index/js/isotope/isotope.pkgd.min.js"></script>
+ 
+     <!-- Magnific Popup -->
+     <script src="/index/js/magnific-popup/jquery.magnific-popup.min.js"></script>
+ 
+     <!-- Counter -->
+     <script src="/index/js/counter/jquery.counterup.min.js"></script>
+ 
+    
+     <!-- Easing -->
+     <script src="/index/js/easing/jquery.easing.1.3.min.js"></script>
+ 
+     <!-- WOW JS -->
+     <script src="/index/js/wow/wow.min.js"></script>
+ 
+     <!-- Custom JS -->
+     <script src="/index/js/script.js"></script>
+ </body>
+ 
+ </html>

@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 <head>
   <title>WELCOME</title>
   <meta charset="utf-8">
@@ -42,7 +42,9 @@
   
 <body>
 <div class="container">
-    <h1><b><%=user.name%></b></h1><hr >
+  <div style="padding-top:20px;">
+    <h1 style="display:inline;"><b><%=user.name%></b></h1> <p style="display:inline ; float: right"><button type="button" class="btn btn-danger"><a href="/logout" style="text-decoration:none ; color:white">Logout</a></button></p><hr/>
+    </div>
     <div class="row">
       <div class="col-md-4" style="padding-top:20px; padding-left:20px;">
       
@@ -60,8 +62,8 @@
       
           <input type="submit" class="btn btn-primary" value="Upload">
 </form>
-<hr/>
-<button type="button" class="btn btn-primary"><a href="/logout" style="text-decoration:none ; color:white">Logout</a></button>
+
+
     </div>
     <div class="col-md-8">
       <div class="alert alert-danger">
@@ -142,10 +144,357 @@ else
 
 }
 
-// function reloadPage()
-// {
-//   window.location.reload();
-// }
+
+</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com - No Copyright -->
+  <title><%=user.name%></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .bg-1 { 
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+  }
+  .bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+  }
+  .bg-3 { 
+    background-color: #ffffff; /* White */
+    color: #555555;
+  }
+  .bg-4 { 
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+  }
+  .container-fluid {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+  }
+  .navbar-nav  li a:hover {
+    color: #1abc9c !important;
+  }
+
+  .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+   
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: transparent;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+img {
+		width: 300px;
+		height: 300px;
+		border:2px solid #fff;
+		-moz-box-shadow: 0px 6px 5px #ccc;
+		-webkit-box-shadow: 0px 6px 5px #ccc;
+		box-shadow: 0px 6px 5px #ccc;
+		-moz-border-radius:190px;
+		-webkit-border-radius:190px;
+		border-radius:190px;
+	}
+
+  .form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+footer {
+    background: #ccc;
+    padding: 30px;
+}
+
+footer p {
+    color: #555;
+    line-height: 20px;
+    margin: 0;
+}
+
+footer p span {
+    color: #f4c613;
+}
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">@<%=user.username%></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#personal">Personal Info</a></li>
+        <li><a href="#personal">Edit Info</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<% if(message) { %>
+  <div class="alertDiv fixed-top" id="alertDiv">
+    <div class="alert alert-dismissible alert-danger" id="alertDivs">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong><%= message %></strong>
+    </div>
+  </div>
+<% } %>
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center" >
+  <h2 class="margin"><b><%=user.name%></b></h2>
+  <form action="/profilePic" method="post" enctype="multipart/form-data">
+    <label class="custom-file-upload">
+        
+        <input type="file" name="profilePic" id="file" class="inputfile" required/>
+        <label for="file"> <%if(user.image){%> <img  src=<%= "/profileUploads/"+user.image %> class="img-circle"><%}else{%>
+          <img src="/user.jpg" class="img-circle"  > <%}%></label>
+       
+    </label>
+    
+    <br>
+
+    <input type="submit" class="btn btn-success" value="Upload">
+</form>
+ 
+</div>
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center" id="personal">
+  <div class="col-md-3">
+
+  </div>
+  <div class="col-md-6">
+  <h3 class="margin">Personal Info</h3>
+  <table class="table">
+      
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><%=user.name%> <p style="display:inline ; float: right"><i class="fas fa-edit" aria-hidden="true" onclick="update('name',id)" id=<%=user.name%>></i></p></td>
+          
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td><%=user.email%> <p style="display:inline ; float: right"><i class="fas fa-edit" aria-hidden="true" onclick="update('email',id)" id=<%=user.email%>></i></p></td>
+          
+        </tr>
+        <tr>
+          <td>Date Of Birth</td>
+          <td><%=user.dob%><p style="display:inline ; float: right"><i class="fas fa-edit" aria-hidden="true" onclick="update('dob',id)" id=<%=user.dob%>></i></p></td>
+          
+        </tr>
+        
+          <tr>
+              <td>Gender</td>
+              <td><%=user.gender%><p style="display:inline ; float: right"><i class="fas fa-edit" aria-hidden="true" onclick="update('gender',id)" id=<%=user.gender%>></i></p></td>
+              
+            </tr>
+            <tr>
+              <td>Contact No.</td>
+              <td><%=user.mobile%><p style="display:inline ; float: right"><i class="fas fa-edit" aria-hidden="true" onclick="openForm()"></i></p></td>
+              
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="col-md-3">
+     
+
+<div class="form-popup" id="myForm">
+  <form action="/profile/show/change" method="POST" class="form-container">
+    <h1>Login</h1>
+
+    <label for=""><b>New Contact No.</b></label>
+    <input type="text" name="mobile" required>
+
+    <!-- <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required> -->
+
+    <button type="submit" class="btn">Change Contact No.</button>
+    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+  </form>
+</div>
+      </div>
+</div>
+
+
+
+<!-- Footer -->
+<footer class="text-center">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <p>
+                  <b> By The Originals</b>
+              </p>
+              
+          </div>
+      </div>
+  </div>
+
+</footer>
+<script>
+    //smooth scrolling
+    $(function() {
+$('a[href*="#"]:not([href="#"])').click(function() {
+if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+  var target = $(this.hash);
+  target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+  if (target.length) {
+    $('html,body').animate({
+      scrollTop: target.offset().top
+    }, 1000);
+    return false;
+  }
+}
+});
+});
+function update (data,id)
+{
+  console.log(data);
+  var person = prompt("Please Enter "+data, id);
+
+if (person == null || person == "")
+{
+  
+}
+
+else
+{
+  $.ajax(
+    {
+      type : "GET",
+      url : "/profile/show/edit",
+      data : {data : data, value : person},
+      success : (data)=>
+      {
+        
+        
+      
+   
+      }
+    }
+  )
+  setTimeout(function(){// wait for 5 secs(2)
+           location.reload(); // then reload the page.(3)
+      }, 5000); 
+  
+} 
+
+}
+
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
 
 </script>
 </body>

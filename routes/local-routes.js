@@ -13,6 +13,7 @@ router.post('/local',passport.authenticate('local',{
 })
 );
 
+
 // router.post('/local',(req,res)=>
 // {
 //     res.send('hello mogli');

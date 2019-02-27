@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+  <title>Signup</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/style.scss">
+  <script src="/js/jquery.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script  src="/js/index.js"></script>
+  <script>
+    function checkForm(form)
+    {
+      if(form.name.value == "" || form.email.value == "" || form.password.value == "" || form.dob.value == "" || form.mobile.value == "" || form.username.value == "" || form.gender.value == "")
+      {
+        alert("Filling Every Column is mandatory");
+        return false
+      }
+      if(form.password.value !== form.password1.value)
+      {
+        alert("Password Confirmation Error");
+        return false
+      }
+      if(form.password.value.length < 8 || form.password.value.length >15)
+      {
+        alert("Password Length Should be in between 8 - 15");
+        return false
+      }
+      var re = /^[\w ]+$/;
+
+// validation fails if the input doesn't match our regular expression
+if(re.test(form.password.value))
+ {
+  alert("Password Must Have Some Special Character other than alphabets and Numbers");
+  form.password.focus();
+  return false;
+}
+return true
+
+    }
+  
+  </script>
+</head>
+<body>
+  <div class="container">
+    <% if(message) { %>
+    <div class="alertDiv fixed-top" id="alertDiv">
+      <div class="alert alert-dismissible alert-danger" id="alertDivs">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong><%= message %></strong>
+      </div>
+    </div>
+  <% } %>
+  <h3><a href="/">Bharat Auth</a></h3>
+    <div class="form">
+
+      <ul class="tab-group">
+        <li class="tab active"><a href="/signup">Sign Up</a></li>
+        <li class="tab"><a href="/login">Log In</a></li>
+      </ul>
+      <div class="page-header">
+        <h1>Sign Up for Free</h1>
+      </div>
+      <form class="md-form" action="/data" method="POST" onsubmit="return checkForm(this);">
+          <div class="form-group">
+            
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Your Full Name" required>
+            </div>
+            <div class="form-group">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your Email" required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="usr" name="username" placeholder="Enter Username" required>
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-control" id="pnumber" name="mobile" placeholder="Enter Your Phone Number" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="pwd1" name="password1" placeholder="Confirm Your Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="dob" name="dob" placeholder="Enter Date Of Birth (DD/MM/YY)" required>
+                        </div>
+                        <div class="form-group">
+
+  <select class="form-control" id="sel1" name="gender" required>
+    <option>Select Your Gender</option>
+    <option>Male</option>
+    <option>Female</option>
+    <option>Other</option>
+  </select>
+</div>
+
+    <div align="center">
+      
+      <button type="submit" class="btn btn-primary btn-block"><b>Signup</b></button>
+    </div>
+    
+  </form>
+
+  </div>
+
+</div>
+</body>
+</html>

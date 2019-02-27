@@ -30,13 +30,16 @@ passport.use(new LocalStrategy(
                 console.log('galat username')
                 return done(null, false, { message: 'Incorrect username.' });
             }
-
-            if (!bcrypt.compare(password, user.password)) {
-                console.log('galat password')
-                return done(null, false, { message: 'Incorrect password.' });
+            else{
+            bcrypt.compare(password, user.password, function (err, result) {
+                if (result == true) {
+                    console.log('done here')
+                    return done(null,user);
+                } else {
+                 return done(null, false, { message: 'Incorrect Password.' });
+                }
+              });
             }
-            
-            return done(null, user);
         });
     }
 ));

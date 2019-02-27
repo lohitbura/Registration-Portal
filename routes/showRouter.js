@@ -13,25 +13,35 @@ router.use('/data',(req,res)=>
         if(currentuser)
         {
             
-            res.render('index',{message : "User Already Exist"});
+            res.render('signup',{message : "Username Already Exist"});
         }
         else{
-            var otp1 = parseInt(Math.random() * (9999 - 1000) + 1000);
-            var mobile = parseInt(req.body.mobile);
-    console.log('fghj',otp1);
-    console.log("hi ",req.body);
-    sendOtp.send(mobile, "PRIIND", otp1, function (error, data) {
-        console.log(data);
-        req.session.otp = otp1;
-        req.session.username = req.body.username;
-        req.session.password = req.body.password;
-        req.session.mobile = req.body.mobile;
-        req.session.name = req.body.name;
-        req.session.dob = req.body.dob;
-        req.session.gender = req.body.gender;
-        req.session.email = req.body.email;
-        res.redirect('/otp');
-      });
+            User.findOne({mobile : req.body.mobile}).then((currentuser)=>
+            {
+                if(currentuser)
+                {
+                    res.render('signup',{message : "Phone No. Already Exist"});
+                }
+                else{
+                    var otp1 = parseInt(Math.random() * (9999 - 1000) + 1000);
+                    var mobile = parseInt(req.body.mobile);
+            console.log('fghj',otp1);
+            console.log("hi ",req.body);
+            sendOtp.send(mobile, "PRIIND", otp1, function (error, data) {
+                console.log(data);
+                req.session.otp = otp1;
+                req.session.username = req.body.username;
+                req.session.password = req.body.password;
+                req.session.mobile = req.body.mobile;
+                req.session.name = req.body.name;
+                req.session.dob = req.body.dob;
+                req.session.gender = req.body.gender;
+                req.session.email = req.body.email;
+                res.redirect('/otp');
+              });
+                }
+            })
+            
      
            
         }
@@ -51,10 +61,15 @@ router.use('/logout',(req,res)=>
     res.redirect('/');
 });
 
+router.get('/signup',(req,res)=>
+{
+  res.render('signup',{message : null});
+})
+
 
 router.use('/',(req,res)=>
 {
-    res.render('index',{message : null});
+    res.render('index',{user : req.user , message : null});
 });
 
 

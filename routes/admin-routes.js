@@ -22,7 +22,10 @@ router.post('/profile',(req,res)=>
       
         if(req.session.admin)
         {
-            res.render('adminProfile');
+            User.find({}, (err, users) => {
+                if (err) return next(err)
+                    res.render('adminProfile', {users: users}); 
+            })
         }
         else
         {
@@ -35,7 +38,10 @@ router.get('/profile',(req,res)=>
 {
     if(req.session.admin)
         {
-            res.render('adminProfile');
+            User.find({}, (err, users) => {
+                if (err) return next(err)
+                    res.render('adminProfile', {users: users}); 
+            })
         }
         else
         {
