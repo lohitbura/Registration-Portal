@@ -22,6 +22,9 @@ router.post('/fill',(req,res)=>
                     res.redirect('/forgot/forgotOtp');
                   });
             }
+            else{
+                res.render('login',{message : "Incorrect details"})
+            }
         }
     })
 })
@@ -80,11 +83,16 @@ router.post('/change',authCheck1,(req,res)=>
             .then(function(hashedPassword) {
              return( 
                  currentuser.set({password : hashedPassword})
+                 
              )})
             .then(function() {
-              
                 req.session.destroy();
-                res.render('login',{message : null});
+                currentuser.save(function (err, updatedTank) {
+                    res.render('login',{message : null});
+                    
+                })
+               
+                
             })
             .catch(function(error){
                 console.log("Error saving user: ");

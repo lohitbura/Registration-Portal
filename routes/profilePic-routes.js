@@ -33,7 +33,7 @@ router.post('/',upload.single('profilePic'), function (req, res) {
     User.findById(req.user.username, function (err, user) {
 
         console.log(req.user.username);
-
+        
         req.user.set({ image: thumbnailPath});
         console.log(req.user.image);
         req.user.save(function (err, updatedTank) {

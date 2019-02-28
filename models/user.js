@@ -11,7 +11,8 @@ const userSchema = new Schema(
         name : String,
         dob : String,
         gender : String,
-        image : String
+        image : String,
+        devices : [String]
     }
 );
 

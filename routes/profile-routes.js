@@ -1,5 +1,7 @@
 router = require('express').Router();
+var bcrypt = require('bcrypt');
 const SendOtp = require('sendotp');
+var BCRYPT_SALT_ROUNDS = 12;
 const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
 const authCheck = (req,res,next)=>
 {
@@ -54,30 +56,69 @@ router.get('/edit',authCheck,(req,res)=>{
     res.send(value);
 
 })
-
-router.post('/change',(req,res)=>{
+router.use('/changePass',authCheck,(req,res)=>
+{
+    User.findOne({username : req.user.username}).then((currentuser)=>
+    {
+        bcrypt.compare(req.body.oldpassword, currentuser.password, function (err, result) {
+            if (result == true) {
+                bcrypt.hash(req.body.password, BCRYPT_SALT_ROUNDS)  // encryption of password
+                .then(function(hashedPassword) {
+                 return( 
+                     currentuser.set({password : hashedPassword})
+                 )})
+                 .then(function() {
+              
+                   currentuser.save(function (err, updatedTank) {
+                    res.redirect('/profile/show');
+                    
+                })
+                   
+                })
+            } else {
+             res.render('cprofile',{message : "Incorrect Password"})
+            }
+          });
+    })
+})
+router.use('/changepassword',authCheck,(req,res)=>
+{
+    res.render('changePassword',{message : null});
+})
+router.post('/change',authCheck,(req,res)=>{
     console.log("ayaaaaaaa");
-
-    User.findOne({mobile : req.body.mobile}).then((currentuser)=>
+    User.findOne({username : req.user.username}).then((cuser)=>
+    {
+        bcrypt.compare(req.body.password, cuser.password, function (err, result) {
+            if(result==true)
             {
-                if(currentuser)
+                User.findOne({mobile : req.body.mobile}).then((currentuser)=>
                 {
-                    res.render('/cprofile',{message : "Phone No. Already Exist"});
-                }
-                else{
-                    var otp1 = parseInt(Math.random() * (9999 - 1000) + 1000);
-                    var mobile = parseInt(req.body.mobile);
-           
-            sendOtp.send(mobile, "PRIIND", otp1, function (error, data) {
+                    if(currentuser)
+                    {
+                        res.render('/cprofile',{message : "Phone No. Already Exist"});
+                    }
+                    else{
+                        var otp1 = parseInt(Math.random() * (9999 - 1000) + 1000);
+                        var mobile = parseInt(req.body.mobile);
                
-                console.log(data);
-                req.session.otp = otp1;
-                req.session.mobile = mobile;
-                
-                res.redirect('/otp/change');
-              });
-                }
-            })  
+                sendOtp.send(mobile, "PRIIND", otp1, function (error, data) {
+                   
+                    console.log(data);
+                    req.session.otp = otp1;
+                    req.session.mobile = mobile;
+                    
+                    res.redirect('/otp/change');
+                  });
+                    }
+                }) 
+            }
+            else{
+                res.render('cprofile',{user: req.user ,message : "password was incorrect"})
+            }
+        })
+    })
+    
 })
 
 router.get('/',authCheck,(req,res)=>{
