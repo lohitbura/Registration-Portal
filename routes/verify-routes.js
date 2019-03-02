@@ -1,8 +1,9 @@
 
 var router = require('express').Router();
 var User = require('../models/user');
-
-
+const SendOtp = require('sendotp');
+const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
+sendOtp.setOtpExpiry('5');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 
@@ -12,10 +13,11 @@ var BCRYPT_SALT_ROUNDS = 12;
 
 router.use('/add',(req,res)=>
 {
-    if(req.session.otp){
-        
-    if(req.body.otp==req.session.otp)
-    {
+    sendOtp.verify(req.session.mobile, req.body.otp, function (error, data) {
+        console.log(data); // data object with keys 'message' and 'type'
+        if(data.type == 'success') 
+        {
+            
 
   bcrypt.hash(req.session.password, BCRYPT_SALT_ROUNDS)  // encryption of password
   .then(function(hashedPassword) {
@@ -44,39 +46,41 @@ router.use('/add',(req,res)=>
       console.log(error);
       next();
   });
-   
-}
-else{
-    res.render('index',{message : "You Have Entered Wrong OTP"});
-}
-}
+        }
+        if(data.type == 'error') {
+            res.render('index',{message : "You Have Entered Wrong OTP"});
 
-})
+        }
+      });
+   })
+
+
 router.use('/change',(req,res)=>
 {
-    if(req.session.otp){
-        
-    if(req.body.otp==req.session.otp)
-    {
+    sendOtp.verify(req.session.mobile, req.body.otp, function (error, data) {
+        console.log(data); // data object with keys 'message' and 'type'
+        if(data.type == 'success') 
+        {
+            User.findById(req.user.username, function (err, user) {
 
-        User.findById(req.user.username, function (err, user) {
-
-            console.log(req.user.username);
-            
-           req.user.set({mobile : req.session.mobile})
-           
-           
-            req.user.save(function (err, updatedTank) {
+                console.log(req.user.username);
                 
-               res.redirect('/profile/show');
+               req.user.set({mobile : req.session.mobile})
+               
+               
+                req.user.save(function (err, updatedTank) {
+                    
+                   res.redirect('/profile/show');
+                });
             });
-        });
-   
-}
-else{
-    res.render('cprofile',{message : "You Have Entered Wrong OTP"});
-}
-}
+        }
+        if(data.type == 'error') {
+            res.render('cprofile',{message : "You Have Entered Wrong OTP"});
+        }
+      });
+        
+    
+
 
 })
 

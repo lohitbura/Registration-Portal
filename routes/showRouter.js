@@ -5,6 +5,7 @@ var User = require('../models/user');
 
 const SendOtp = require('sendotp');
 const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
+sendOtp.setOtpExpiry('5');
 router.use('/data',(req,res)=>
 {
     
@@ -29,7 +30,7 @@ router.use('/data',(req,res)=>
             console.log("hi ",req.body);
             sendOtp.send(mobile, "PRIIND", otp1, function (error, data) {
                 console.log(data);
-                req.session.otp = otp1;
+              //  req.session.otp = otp1;
                 req.session.username = req.body.username;
                 req.session.password = req.body.password;
                 req.session.mobile = req.body.mobile;

@@ -1,8 +1,10 @@
 router = require('express').Router();
 var bcrypt = require('bcrypt');
 const SendOtp = require('sendotp');
+
 var BCRYPT_SALT_ROUNDS = 12;
 const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
+sendOtp.setOtpExpiry('5');
 const authCheck = (req,res,next)=>
 {
     console.log('yha aaya',req.user)
@@ -96,7 +98,7 @@ router.post('/change',authCheck,(req,res)=>{
                 {
                     if(currentuser)
                     {
-                        res.render('/cprofile',{message : "Phone No. Already Exist"});
+                        res.render('cprofile',{user : req.user ,message : "Phone No. Already Exist"});
                     }
                     else{
                         var otp1 = parseInt(Math.random() * (9999 - 1000) + 1000);
@@ -105,7 +107,7 @@ router.post('/change',authCheck,(req,res)=>{
                 sendOtp.send(mobile, "PRIIND", otp1, function (error, data) {
                    
                     console.log(data);
-                    req.session.otp = otp1;
+                  //  req.session.otp = otp1;
                     req.session.mobile = mobile;
                     
                     res.redirect('/otp/change');
