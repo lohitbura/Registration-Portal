@@ -3,8 +3,8 @@ var bcrypt = require('bcrypt');
 const SendOtp = require('sendotp');
 const VoiceIt2WebSDK = require('./../voiceit-node-backend');
 const multer = require('multer')();
-var VOICEIT_API_KEY = "key_f0099f2b47d6477da80eddb4cc994b18";
-var VOICEIT_API_TOKEN = "tok_216c1a47de29485aa922f0406f761ff0";
+var VOICEIT_API_KEY = "key_56e0da5cb76743868a4acd014c46ff5f";
+var VOICEIT_API_TOKEN = "tok_7e87336e14974b218bb8e6f64b90477e";
 var BCRYPT_SALT_ROUNDS = 12;
 const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
 sendOtp.setOtpExpiry('5');
@@ -181,6 +181,7 @@ router.get('/status',authCheck, (req,res)=>
 router.get('/create',authCheck, (req, res) => {
 	const myVoiceIt = new VoiceIt2WebSDK(VOICEIT_API_KEY, VOICEIT_API_TOKEN);
 	const createdUser = myVoiceIt.createUser((jsonResponse)=>{
+        // console.log(jsonResponse)
     if(jsonResponse.status == 201)
     {
         console.log(req.user);
