@@ -24,13 +24,14 @@
 		// 		}
 		// 	}
 		// });
-
+		
         myVoiceIt.encapsulatedVideoEnrollment({
             contentLanguage:'en-US',
             phrase:'never forget tomorrow is a new day',
             completionCallback:function(success, jsonResponse){
                 if(success){
-                    alert('Video Enrollments Done!');
+					alert('Video Enrollments Done!');
+					window.location.replace("/profile/show/status");
                 } else {
                     alert('Video Enrollments Cancelled or Failed!');
                 }
