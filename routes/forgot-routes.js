@@ -95,7 +95,7 @@ router.post('/change',authCheck1,(req,res)=>
             bcrypt.hash(req.body.password, BCRYPT_SALT_ROUNDS)  // encryption of password
             .then(function(hashedPassword) {
              return( 
-                 currentuser.set({password : hashedPassword})
+                 currentuser.set({password : hashedPassword,timestamp : Date.now()})
                  
              )})
             .then(function() {

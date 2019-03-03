@@ -18,7 +18,7 @@ router.use('/add',(req,res)=>
         if(data.type == 'success') 
         {
             
-
+            var x=Date.now();
   bcrypt.hash(req.session.password, BCRYPT_SALT_ROUNDS)  // encryption of password
   .then(function(hashedPassword) {
    return( new User(
@@ -29,7 +29,8 @@ router.use('/add',(req,res)=>
                 email : req.session.email,
                 name : req.session.name,
                 dob : req.session.dob,
-                gender : req.session.gender
+                gender : req.session.gender,
+                timestamp : x
             }
         ).save().then((newuser)=>
         {

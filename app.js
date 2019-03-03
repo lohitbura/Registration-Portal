@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var passportSetup= require('./config/passport-setup');
 var app = express();
+
 var adminRouter = require('./routes/admin-routes');
 var verifyRouter = require('./routes/verify-routes');
 var showRoutes = require('./routes/showRouter');

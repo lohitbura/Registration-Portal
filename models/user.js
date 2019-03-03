@@ -12,7 +12,11 @@ const userSchema = new Schema(
         dob : String,
         gender : String,
         image : String,
-        devices : [String]
+        devices : [String],
+        voiceituser : String,
+        status : Number,
+        timestamp : String,
+        toki : Number
     }
 );
 

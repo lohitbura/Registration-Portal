@@ -174,7 +174,7 @@ footer p span {
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#personal">Personal Info</a></li>
-        
+        <%if(!user.status == 1){%><li><a href="/profile/show/create">Create Face Recognisation</a></li><%}%>
         <li><a href="/profile/show/changepassword">Change Password</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>

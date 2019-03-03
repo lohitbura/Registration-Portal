@@ -32,7 +32,20 @@ passport.use(new LocalStrategy(
             }
             else{
             bcrypt.compare(password, user.password, function (err, result) {
-                if (result == true) {
+                var x = Date.now();
+
+                var res =   parseInt(x) - parseInt(user.timestamp);
+                
+               
+                console.log(res/1000);
+                if(result == true && res/1000 > 500)
+                {
+                    user.toki = 1;
+                    user.save();
+                   return done(null,user);
+                }
+                
+                else if (result == true) {
                     console.log('done here')
                     return done(null,user);
                 } else {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1 id="tok"><%= token %></h1>
+	<button onclick="createface()">create</button>
+	<button onclick="verify()">verify</button>
+<script src='/dist/voiceit2.min.js'></script>
+<script type="text/javascript">
+	var token = document.getElementById('tok').innerHTML
+	console.log(token);
+	var myVoiceIt = new VoiceIt2.initialize('/profile/show/create', '/dist/face_detector.wasm');
+	myVoiceIt.setThemeColor('#0000FF');
+	myVoiceIt.setSecureToken(token);
+		
+		myVoiceIt.encapsulatedFaceEnrollment({
+		completionCallback:function(success, jsonResponse){
+				if(success){
+                    alert('Face Enrollment Done!');
+                    window.location.replace("/profile/show/status");
+				} else {
+					alert('Face Enrollment Cancelled or Failed!');
+				}
+			}
+		});
+
+</script>
+</body>
+</html>
