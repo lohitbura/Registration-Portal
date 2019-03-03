@@ -64,16 +64,7 @@ app.use('/profilePic',profilePicRouter);
 app.use('/',showRoutes);
 
 
- //app = require("https-localhost");
-//  var options = {
-//     key: fs.readFileSync( './localhost.key' ),
-//     cert: fs.readFileSync( './localhost.cert' ),
-//     requestCert: false,
-//     rejectUnauthorized: false
-// };
-
-
-//var server = https.createServer( options, app );
+ 
 var port = process.env.PORT || 3000;
 
 app.listen( port, function () {
