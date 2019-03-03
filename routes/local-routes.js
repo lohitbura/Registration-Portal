@@ -37,20 +37,20 @@ router.post('/regularChange',(req,res)=>
     })
 })
 
-const authCheck = (req,res,next)=>
-{
-    console.log('yha aaya',req.user)
+// const authCheck = (req,res,next)=>
+// {
+//     console.log('yha aaya',req.user)
     
-     if(!req.user)
-    {
-        res.redirect('/');
-    }
-    else{
-        next();
-    }
-};
+//      if(!req.user)
+//     {
+//         res.redirect('/');
+//     }
+//     else{
+//         next();
+//     }
+// };
 
-router.use('/regularChange',authCheck,(req,res)=>
+router.use('/regularChange',(req,res)=>
 {
     res.render('changeRegular');
 })

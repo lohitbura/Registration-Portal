@@ -66,6 +66,20 @@ router.get('/edit',authCheck,(req,res)=>{
     res.send(value);
 
 })
+
+router.get('/deleteMac',authCheck,(req,res)=>
+{
+    User.findById(req.user.username ,function (err, user)
+    {
+    
+        req.user.set({devices : []})
+        req.user.save().then(()=>
+        {
+            res.redirect('/profile/show');
+        })
+    })
+})
+
 router.use('/changePass',authCheck,(req,res)=>
 {
     User.findOne({username : req.user.username}).then((currentuser)=>
