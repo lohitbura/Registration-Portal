@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var User = require('../models/user');
 const SendOtp = require('sendotp');
-const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
+const sendOtp = new SendOtp('Your OTP Key');
 var bcrypt = require('bcrypt');
 var BCRYPT_SALT_ROUNDS = 12;
 sendOtp.setOtpExpiry('5');

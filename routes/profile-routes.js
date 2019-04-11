@@ -3,10 +3,10 @@ var bcrypt = require('bcrypt');
 const SendOtp = require('sendotp');
 const VoiceIt2WebSDK = require('./../voiceit-node-backend');
 const multer = require('multer')();
-var VOICEIT_API_KEY = "key_03179856939f45528403238100710595";
-var VOICEIT_API_TOKEN = "tok_56df2c2683194982bbaf79eab1efa016";
+var VOICEIT_API_KEY = "your api key";
+var VOICEIT_API_TOKEN = "your token";
 var BCRYPT_SALT_ROUNDS = 12;
-const sendOtp = new SendOtp('264048Ar2eGxRl2GwH5c6e36cd');
+const sendOtp = new SendOtp('Your Otp Key');
 sendOtp.setOtpExpiry('5');
 const authCheck = (req,res,next)=>
 {

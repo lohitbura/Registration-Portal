@@ -25,7 +25,7 @@ const bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb://lohit:bharat123auth@ds139435.mlab.com:39435/bharat",{ useNewUrlParser: true });
+mongoose.connect("#Your Data Base Address",{ useNewUrlParser: true });
 //var db = mongoose.connection;
 
 app.set('views', path.join(__dirname, 'views'));
